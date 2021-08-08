@@ -26,7 +26,7 @@ final class {{ module_info.name }}Router {
         // guard let view = R.storyboard.{{ module_info.name }}.instantiateInitialViewController() else {
         //     fatalError("Fail to load {{ module_info.name }}ViewController from Storyboard.")
         // }
-        let interactor = {{ module_info.name }}Interactor(repository: // TODO: pass repository here)
+        let interactor = {{ module_info.name }}Interactor(repository: ) // TODO: pass repository here
         let router = {{ module_info.name }}Router(viewController: view)
         let presenter = {{ module_info.name }}Presenter(view: view, interactor: interactor, router: router)
 
