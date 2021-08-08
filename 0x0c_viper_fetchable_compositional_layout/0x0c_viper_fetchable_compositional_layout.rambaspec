@@ -21,7 +21,7 @@ code_files:
 - {name: Router/Router.swift, path: Code/Router/router.swift.liquid}
 
 # Repository layer
-- {name: Repository/Repository.swift,  path: Code/Repository/repository.swift.liquid}
+- {name: Repository/RepositoryInterface.swift,  path: Code/Repository/repository.swift.liquid}
 
 # The declarations for test files
 test_files:
