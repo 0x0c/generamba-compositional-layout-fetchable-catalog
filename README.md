@@ -20,7 +20,7 @@ templates:
 
 ## Templates
 
-- [compositional-layout](https://raw.githubusercontent.com/0x0c/generamba-compositional-layout-fetchable-catalog/main/0x0c_viper_compositional_layout/0x0c_viper_fetchable_compositional_layout.rambaspec)
+- [compositional-layout](https://raw.githubusercontent.com/0x0c/generamba-compositional-layout-fetchable-catalog/main/0x0c_viper_fetchable_compositional_layout/0x0c_viper_fetchable_compositional_layout.rambaspec)
 
 # Dependencies
 
