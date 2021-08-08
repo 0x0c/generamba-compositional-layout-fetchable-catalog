@@ -1,0 +1,94 @@
+//
+//  {{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import Combine
+import CompositionalLayoutViewController
+import CompositionalLayoutViewControllerViperExtension
+import UIKit
+
+protocol {{ module_info.name }}PresenterInput: CollectionViewPresenterInput, CollectionViewFetchablePresenter {
+    // MARK: View Life-Cycle methods
+
+    func viewDidLoad()
+
+    // MARK: Other methods called from View
+}
+
+final class {{ module_info.name }}Presenter {
+    // MARK: VIPER properties
+
+    weak var view: {{ module_info.name }}ViewInput!
+    var interactor: {{ module_info.name }}InteractorInput!
+    var router: {{ module_info.name }}RouterInput!
+    @Published var isLoading = false
+
+    // MARK: Stored instance properties
+
+    // MARK: Computed instance properties
+
+    init(view: {{ module_info.name }}ViewInput, interactor: {{ module_info.name }}InteractorInput, router: {{ module_info.name }}RouterInput) {
+        self.view = view
+        self.interactor = interactor
+        self.router = router
+    }
+}
+
+extension {{ module_info.name }}Presenter: {{ module_info.name }}PresenterInput {
+    var isLoadingPublisher: Published<Bool>.Publisher {
+        return $isLoading
+    }
+
+    var sections: [CollectionViewSection] {
+        return interactor.sections
+    }
+
+    func viewDidLoad() {
+        fetch()
+    }
+
+    func section(for sectionIndex: Int) -> CollectionViewSection {
+        return interactor.section(for: sectionIndex)
+    }
+
+    func didItemSelect(indexPath: IndexPath) {
+        // TODO:
+    }
+
+    @discardableResult
+    func fetch(force: Bool = true) -> Promise<Void> {
+        let promise = Promise<Void>.pending()
+        interactor.fetch(force: force).then { [weak self] sections in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.view.update(sections: sections)
+            promise.fulfill(())
+        }.catch { [weak self] error in
+            guard let weakSelf = self else {
+                return
+            }
+            // TODO: handle error
+            promise.reject(error)
+        }
+        return promise
+    }
+}
+
+extension {{ module_info.name }}Presenter: {{ module_info.name }}InteractorOutput {
+    func willFetchStart() {
+        isLoading = true
+    }
+
+    func willFetchEnd() {
+        isLoading = false
+    }
+
+    func didFetchEnd() {
+        isLoading = false
+    }
+}
